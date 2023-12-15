@@ -59,7 +59,7 @@ def parse_args():
         "--subnets", "-s",
         help="The path to the custom subnets file. Each line should be either a single ip (v4 or v6)"
         " or a subnet in cidr notation (v4 or v6). If not provided, the program will read the list of cidrs"
-        " from https://github.com/MortezaBashsiz/CFScanner/blob/main/config/cf.local.iplist",
+        " from https://github.com/otahmasebii/CFScanner/blob/main/config/cf.local.iplist",
         type=str,
         metavar="",
         dest="subnets",
@@ -108,7 +108,7 @@ def parse_args():
     config_or_template.add_argument(
         "--config", "-c",
         help="The path to the config file. For config file example,"
-        " see sudoer default config: https://github.com/MortezaBashsiz/CFScanner/blob/main/cofig/ClientConfig.json"
+        " see sudoer default config: https://github.com/otahmasebii/CFScanner/blob/main/cofig/ClientConfig.json"
         " If not provided, the program will read the default sudoer config file",
         metavar="",
         dest="config_path",
@@ -213,7 +213,7 @@ def parse_args():
         help="If passed, upload test will be conducted. If not passed, only download and fronting test will be conducted",
         dest="do_upload_test",
         action="store_true",
-        default=False,
+        default=True,
         required=False
     )
     upload_speed_grp.add_argument(

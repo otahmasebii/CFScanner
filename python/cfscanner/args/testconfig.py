@@ -11,6 +11,7 @@ from ..xray.binary import download_binary
 
 SCRIPTDIR = os.getcwd()
 
+
 class TestConfig:
     @classmethod
     def from_args(cls, args: argparse.Namespace):
@@ -21,29 +22,29 @@ class TestConfig:
         """
         # create test config
         test_config = cls()
-
         # load config if need be
         if not args.no_vpn and args.template_path is None:
             if args.config_path is None:
                 os.makedirs(os.path.join(SCRIPTDIR, ".tmp"), exist_ok=True)
                 download_file(
-                    url="https://raw.githubusercontent.com/MortezaBashsiz/CFScanner/main/config/ClientConfig.json",
+                    url="https://raw.githubusercontent.com/otahmasebii/CFScanner/main/config/ClientConfig.json",
                     save_path=os.path.join(SCRIPTDIR, ".tmp", "sudoer_config.json")
                 )
                 args.config_path = os.path.join(
                     SCRIPTDIR, ".tmp", "sudoer_config.json")
             with open(args.config_path, "r") as infile:
                 file_content = json.load(infile)
-                test_config.user_id = file_content["id"]
-                test_config.ws_header_host = file_content["host"]
-                test_config.address_port = int(file_content["port"])
-                test_config.user_id = file_content["id"]
-                test_config.ws_header_path = "/" + \
-                    (file_content["path"].lstrip("/"))
+                test_config.protocol = file_content["protocol"]
+                test_config.port = file_content["port"]
+                test_config.user_id = file_content["user"]["id"]
+                test_config.streamSettings = file_content["streamSettings"]
 
         if args.template_path is None:
             test_config.custom_template = False  # user did not provide a custom template
-            test_config.proxy_config_template = templates.vmess_ws_tls
+            if test_config.protocol == "vmess":
+                test_config.proxy_config_template = templates.vmess_ws_tls
+            if test_config.protocol == "vless":
+                test_config.proxy_config_template = templates.vless_tls
         else:
             test_config.custom_template = True  # user provided a custom template
             try:

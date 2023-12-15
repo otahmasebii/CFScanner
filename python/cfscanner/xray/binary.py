@@ -41,7 +41,7 @@ def download_binary(
     zipdir = os.path.join(PATH, ".tmp")
     os.makedirs(zipdir, exist_ok=True)
     zip_path = os.path.join(zipdir, f"{platform_str}.zip")
-    bin_fname = f"xray-{'-'.join(system_info)}"
+    bin_fname = f"xray-{'-'.join(system_info)}-{LATEST_SUPPORTED_VERSION}"
     bin_path = os.path.join(bin_dir, bin_fname)
     # if windows, add .exe
     if system_info[0] == "windows":

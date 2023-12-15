@@ -1,3 +1,4 @@
+import json
 import os
 
 from ..args.testconfig import TestConfig
@@ -25,15 +26,10 @@ def create_proxy_config(
     config = test_config.proxy_config_template.replace(
         "PORTPORT", local_port_str)
     config = config.replace("IP.IP.IP.IP", edge_ip)
-    
     if not test_config.custom_template and (not test_config.novpn):
-        config = config.replace("CFPORTCFPORT", str(test_config.address_port))
+        config = config.replace("CFPORTCFPORT", str(test_config.port))
         config = config.replace("IDID", test_config.user_id)
-        config = config.replace("HOSTHOST", test_config.ws_header_host)
-        config = config.replace("ENDPOINTENDPOINT", test_config.ws_header_path)
-        hostname = test_config.ws_header_host.split(".", maxsplit=1)[1]
-        random_sni = f"{uuid.uuid4()}.{hostname}"
-        config = config.replace("RANDOMHOST", random_sni)
+        config = config.replace("{{STREAMINGSETTINGS}}", json.dumps(test_config.streamSettings))
 
     config_path = os.path.join(config_dir, f"config-{edge_ip.replace(':', '_')}.json")
     with open(config_path, "w") as configFile:

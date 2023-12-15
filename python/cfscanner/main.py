@@ -44,13 +44,15 @@ def main():
     logger = logging.getLogger(__name__)
     console = Console()
 
-    logo = """                                                                                                                                        
-____ ____ ____ ____ ____ _  _ _  _ ____ ____ 
-|    |___ [__  |    |__| |\ | |\ | |___ |__/ 
-|___ |    ___] |___ |  | | \| | \| |___ |  \ 
-"""
-    console.print(f"[bold green1]{logo}[/bold green1]")
-
+    logo = """
+ _______  _______  _______  _______  _______  __    _  __    _  _______  ______   
+|       ||       ||       ||       ||   _   ||  |  | ||  |  | ||       ||    _ |  
+|       ||    ___||  _____||       ||  |_|  ||   |_| ||   |_| ||    ___||   | ||  
+|       ||   |___ | |_____ |       ||       ||       ||       ||   |___ |   |_||_ 
+|      _||    ___||_____  ||      _||       ||  _    ||  _    ||    ___||    __  |
+|     |_ |   |     _____| ||     |_ |   _   || | |   || | |   ||   |___ |   |  | |
+|_______||___|    |_______||_______||__| |__||_|  |__||_|  |__||_______||___|  |_|"""
+    console.print(f"[green1]{logo}[/green1]")
     try:
         console.print(
             f"[bold green1]v{pkg_resources.get_distribution('cfscanner').version}[bold green1]\n\n"
@@ -156,7 +158,7 @@ ____ ____ ____ ____ ____ _  _ _  _ ____ ____
             f'[bright_blue]Subnets successfully read from "{args.subnets}"[/bright_blue]'
         )
     else:
-        subnets_default_address = "https://raw.githubusercontent.com/MortezaBashsiz/CFScanner/main/config/cf.local.iplist"
+        subnets_default_address = "https://raw.githubusercontent.com/otahmasebii/CFScanner/main/config/cf.local.iplist"
         console.log(
             f'[bright_blue]Subnets not provided. Default address will be used:\n"{subnets_default_address}"[/bright_blue]'
         )
@@ -165,7 +167,7 @@ ____ ____ ____ ____ ____ _  _ _  _ ____ ____
         ):
             try:
                 cidr_generator, n_cidrs = read_cidrs(
-                    "https://raw.githubusercontent.com/MortezaBashsiz/CFScanner/main/config/cf.local.iplist",
+                    "https://raw.githubusercontent.com/otahmasebii/CFScanner/main/config/cf.local.iplist",
                     shuffle=args.shuffle_subnets,
                 )
             except SubnetsReadError as e:

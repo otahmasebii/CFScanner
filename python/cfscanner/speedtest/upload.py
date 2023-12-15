@@ -32,7 +32,7 @@ def upload_speed_test(
     cf_time = float(r.headers.get("Server-Timing").split("=")[1]) / 1000
     latency = total_time - cf_time
 
-    mb = n_bytes * 8 / (10 ** 6)
+    mb = n_bytes / (2**20)
     upload_speed = mb / cf_time
 
     return upload_speed, latency

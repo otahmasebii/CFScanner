@@ -198,7 +198,7 @@ def test_ip(
                 test_result.message = fail_msg
                 test_result.is_ok = False
                 return test_result
-            up_speed_kBps = up_speed / 8 * 1000
+            up_speed_kBps = up_speed * 1024
             if up_speed_kBps >= test_config.min_ul_speed:
                 test_result.result["upload"]["speed"][try_idx] = up_speed
                 test_result.result["upload"]["latency"][try_idx] = round(
@@ -212,7 +212,7 @@ def test_ip(
                 return test_result
 
     process.kill()
-
+    print(test_result.result["upload"])
     test_ok_msg = ok_message(test_result.result)
 
     test_result.is_ok = True
