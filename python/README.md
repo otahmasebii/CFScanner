@@ -20,11 +20,6 @@ CFSCanner runs on different operating systems including and not limited to:
   - pysocks
   - rich
 
-# Installing (and upgrading)
-
-```bash
-pip install cfscanner --upgrade
-```
 
 ## Creating a custom config file (optional)
 
@@ -34,11 +29,35 @@ pip install cfscanner --upgrade
 
 ```json
 {
-  "id": "248ecb72-89cf-5be7-923f-b790fca681c5",
-  "host": "scherehtzhel01.sudoer.net",
-  "port": "443",
-  "path": "api01",
-  "serverName": "248ecb72-89cf-5be7-923f-b790fca681c5.sudoer.net"
+	"protocol": "vless",
+	"port": 443,
+	"user": {
+                "encryption": "none",
+                "flow": "",
+                "id": "<usr-id>",
+                "level": 8,
+                "security": "auto"
+              },
+	"streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "",
+          "publicKey": "",
+          "serverName": "<server_name>",
+          "shortId": "",
+          "show": false,
+          "spiderX": ""
+        },
+        "wsSettings": {
+          "headers": {
+            "Host": "<server_name>"
+          },
+          "path": "/"
+        }
+      },
+	"subnetsList": "https://raw.githubusercontent.com/otahmasebii/CFScanner/main/config/cf.local.iplist"
 }
 ```
 
@@ -181,7 +200,6 @@ The results will be stored in the `results` directory. Each line of the generate
 - `upload_speed_1,...,n_ties`: Values of download speeds in mbps for each upload
 - `download_latency_1,...,n_tries`: Values of download latencies in ms
 - `download_latency_1,..._n_tries`: Values of upload latencies in ms
-
 ---
 
 For each time running the code, a result file is generated in the result folder with the datetime string to avoid overwriting (e.g, `20230226_180502_result.csv`)
