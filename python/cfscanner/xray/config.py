@@ -29,6 +29,10 @@ def create_proxy_config(
     if not test_config.custom_template and (not test_config.novpn):
         config = config.replace("CFPORTCFPORT", str(test_config.port))
         config = config.replace("IDID", test_config.user_id)
+        if test_config.random_sni:
+            hostname = test_config.streamSettings.get("tlsSettings").get("serverName").split(".", maxsplit=1)[1]
+            random_sni = f"{uuid.uuid4()}.{hostname}"
+            test_config.streamSettings.get("tlsSettings")["serverName"] = random_sni
         config = config.replace("{{STREAMINGSETTINGS}}", json.dumps(test_config.streamSettings))
 
     config_path = os.path.join(config_dir, f"config-{edge_ip.replace(':', '_')}.json")

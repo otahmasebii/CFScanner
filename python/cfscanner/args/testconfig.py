@@ -38,6 +38,7 @@ class TestConfig:
                 test_config.port = file_content["port"]
                 test_config.user_id = file_content["user"]["id"]
                 test_config.streamSettings = file_content["streamSettings"]
+                test_config.random_sni = file_content.get("random_sni", False)
 
         if args.template_path is None:
             test_config.custom_template = False  # user did not provide a custom template

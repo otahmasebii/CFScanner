@@ -212,7 +212,6 @@ def test_ip(
                 return test_result
 
     process.kill()
-    print(test_result.result["upload"])
     test_ok_msg = ok_message(test_result.result)
 
     test_result.is_ok = True
